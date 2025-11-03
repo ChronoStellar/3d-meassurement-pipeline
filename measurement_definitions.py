@@ -18,7 +18,8 @@ STANDARD_LABELS = {
         'M': 'calf left circumference',
         'N': 'ankle left circumference',
         'O': 'shoulder breadth',
-        'P': 'height'
+        'P': 'height',
+        'T': 'torso back length'
     }
 
 
@@ -46,6 +47,7 @@ MEASUREMENT_TYPES = {
         "calf left circumference": MeasurementType.CIRCUMFERENCE,
         "ankle left circumference": MeasurementType.CIRCUMFERENCE,
         "shoulder breadth": MeasurementType.LENGTH,
+        "torso back length": MeasurementType.LENGTH,
 
         "arm length (shoulder to elbow)": MeasurementType.LENGTH,
         "arm length (spine to wrist)": MeasurementType.LENGTH,
@@ -125,6 +127,11 @@ class SMPLMeasurementDefinitions():
                         SMPL_LANDMARK_INDICES["Rt. Humeral Lateral Epicn"],
                         SMPL_LANDMARK_INDICES["Rt. Ulnar Styloid"]
                     ),
+                    "torso back length":
+                        (
+                            SMPL_LANDMARK_INDICES["Cervicale"],
+                            SMPL_LANDMARK_INDICES["HIP"]
+                        )
                }
 
     # defined with landmarks and joints

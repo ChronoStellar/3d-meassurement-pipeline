@@ -37,7 +37,7 @@ from lib.data_utils.kp_utils import convert_kps
 from lib.utils.pose_tracker import run_posetracker
 
 from lib.utils.demo_utils import (
-    download_youtube_clip,
+    # download_youtube_clip,
     smplify_runner,
     convert_crop_coords_to_orig_img,
     convert_crop_cam_to_orig_img,
@@ -49,21 +49,20 @@ from lib.utils.demo_utils import (
 
 MIN_NUM_FRAMES = 25
 
-
 def main(args):
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
     video_file = args.vid_file
 
-    # ========= [Optional] download the youtube video ========= #
-    if video_file.startswith('https://www.youtube.com'):
-        print(f'Donwloading YouTube video \"{video_file}\"')
-        video_file = download_youtube_clip(video_file, '/tmp')
+    # # ========= [Optional] download the youtube video ========= #
+    # if video_file.startswith('https://www.youtube.com'):
+    #     print(f'Donwloading YouTube video \"{video_file}\"')
+    #     video_file = download_youtube_clip(video_file, '/tmp')
 
-        if video_file is None:
-            exit('Youtube url is not valid!')
+    #     if video_file is None:
+    #         exit('Youtube url is not valid!')
 
-        print(f'YouTube Video has been downloaded to {video_file}...')
+    #     print(f'YouTube Video has been downloaded to {video_file}...')
 
     if not os.path.isfile(video_file):
         exit(f'Input video \"{video_file}\" does not exist!')
@@ -112,7 +111,7 @@ def main(args):
 
     # ========= Load pretrained weights ========= #
     pretrained_file = download_ckpt(use_3dpw=False)
-    ckpt = torch.load(pretrained_file)
+    ckpt = torch.load(pretrained_file, weights_only = False)
     print(f'Performance of pretrained model on 3DPW: {ckpt["performance"]}')
     ckpt = ckpt['gen_state_dict']
     model.load_state_dict(ckpt, strict=False)
@@ -352,6 +351,68 @@ def main(args):
     shutil.rmtree(image_folder)
     print('================= END =================')
 
+def run_vibe(
+    vid_file: str,
+    output_folder: str,
+    tracking_method: str = 'bbox',
+    detector: str = 'yolo',
+    yolo_img_size: int = 416,
+    tracker_batch_size: int = 12,
+    staf_dir: str = '/home/mkocabas/developments/openposetrack',
+    vibe_batch_size: int = 450,
+    display: bool = False,
+    run_smplify: bool = False,
+    no_render: bool = False,
+    wireframe: bool = False,
+    sideview: bool = False,
+    save_obj: bool = False,
+    smooth: bool = False,
+    smooth_min_cutoff: float = 0.004,
+    smooth_beta: float = 0.7
+):
+    """
+    Runs the VIBE inference pipeline with specified parameters.
+
+    This function serves as an API-callable alternative to the
+    command-line interface.
+    """
+    
+    # 1. Create a namespace object to simulate what argparse.parse_args()
+    #    would return.
+    args = argparse.Namespace(
+        vid_file=vid_file,
+        output_folder=output_folder,
+        tracking_method=tracking_method,
+        detector=detector,
+        yolo_img_size=yolo_img_size,
+        tracker_batch_size=tracker_batch_size,
+        staf_dir=staf_dir,
+        vibe_batch_size=vibe_batch_size,
+        display=display,
+        run_smplify=run_smplify,
+        no_render=no_render,
+        wireframe=wireframe,
+        sideview=sideview,
+        save_obj=save_obj,
+        smooth=smooth,
+        smooth_min_cutoff=smooth_min_cutoff,
+        smooth_beta=smooth_beta
+    )
+
+    # 2. Call the original main function with the simulated args
+    print(f"Starting VIBE processing for: {vid_file}")
+    try:
+        # Call the main function from VIBE.py
+        main(args)
+        print(f"Successfully processed video. Results are in: {output_folder}")
+        
+        # You could optionally return the path to the results here
+        # return os.path.join(output_folder, os.path.basename(vid_file).replace('.mp4', ''))
+        
+    except Exception as e:
+        print(f"An error occurred during VIBE processing: {e}")
+        # Optionally re-raise the exception if you want the caller to handle it
+        # raise e
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

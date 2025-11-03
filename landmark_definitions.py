@@ -26,6 +26,7 @@ SMPL_LANDMARK_INDICES = {"HEAD_TOP": 412,
                     "LEFT_ELBOW": 1643,
 
                     "BUTTHOLE": 3119,
+                    "HIP": 3159,
 
                     # introduce CAESAR landmarks because
                     # i need to measure arms in parts

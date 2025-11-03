@@ -35,9 +35,6 @@ SMPL_IND2JOINT = {
 
 SMPL_JOINT2IND = {name:ind for ind,name in SMPL_IND2JOINT.items()}
 
-
-
-
 SMPLX_NUM_JOINTS = 55
 
 SMPLX_IND2JOINT = {
