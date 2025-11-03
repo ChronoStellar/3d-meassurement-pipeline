@@ -10,5 +10,8 @@ mv data/vibe_data/sample_video.mp4 .
 mkdir -p $HOME/.torch/models/
 mv data/vibe_data/yolov3.weights $HOME/.torch/models/
 
+mkdir data/smpl
 gdown "https://drive.google.com/uc?id=1PLUUsB2w7EOc4Zr6QviQuLOL6NVFN_BI" -O data/smpl/SMPL_NEUTRAL.pkl
+
+mkdir data/smplx
 gdown "https://drive.google.com/uc?id=1tVgCkqRVNsW8BtLKYeuqNUfT2PSxE6GL" -O data/smplx/SMPLX_NEUTRAL.pkl
