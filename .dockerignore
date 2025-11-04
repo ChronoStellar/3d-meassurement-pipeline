@@ -1,0 +1,41 @@
+# .dockerignore
+
+# Git repository files (very important)
+.git/
+.gitignore
+
+# Docker-related files
+Dockerfile
+.dockerignore
+
+# Python virtual environments (very important)
+venv/
+.venv/
+env/
+.env
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Project output folders
+output/
+vibe_results/
+
+# Test data (don't copy sample videos into the image)
+*.mp4
+*.mov
+
+# Any other result files
+*.ply
+*.pkl
+
+# Your old 'Docker' folder
+Docker/
+
+# OS-specific files (e.g., from macOS)
+.DS_Store
+
+# IDE configuration folders
+.vscode/
+.idea/

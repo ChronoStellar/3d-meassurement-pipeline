@@ -17,8 +17,6 @@ pytube
 pandas
 filterpy
 matplotlib
-tensorflow
-tensorboard
 torchvision
 scikit-learn
 scikit-image
