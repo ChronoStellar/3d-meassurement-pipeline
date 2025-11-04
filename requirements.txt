@@ -15,7 +15,9 @@ pyrender==0.1.45
 progress
 pytube
 pandas
+gunicorn
 filterpy
+flask
 matplotlib
 torchvision
 scikit-learn

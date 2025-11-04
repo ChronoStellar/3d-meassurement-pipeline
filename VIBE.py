@@ -37,7 +37,6 @@ from lib.data_utils.kp_utils import convert_kps
 from lib.utils.pose_tracker import run_posetracker
 
 from lib.utils.demo_utils import (
-    # download_youtube_clip,
     smplify_runner,
     convert_crop_coords_to_orig_img,
     convert_crop_cam_to_orig_img,
@@ -53,21 +52,10 @@ def main(args):
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
     video_file = args.vid_file
-
-    # # ========= [Optional] download the youtube video ========= #
-    # if video_file.startswith('https://www.youtube.com'):
-    #     print(f'Donwloading YouTube video \"{video_file}\"')
-    #     video_file = download_youtube_clip(video_file, '/tmp')
-
-    #     if video_file is None:
-    #         exit('Youtube url is not valid!')
-
-    #     print(f'YouTube Video has been downloaded to {video_file}...')
-
     if not os.path.isfile(video_file):
         exit(f'Input video \"{video_file}\" does not exist!')
 
-    output_path = os.path.join(args.output_folder, os.path.basename(video_file).replace('.mp4', ''))
+    output_path = os.path.join(args.output_folder)
     os.makedirs(output_path, exist_ok=True)
 
     image_folder, num_frames, img_shape = video_to_images(video_file, return_info=True)

@@ -116,12 +116,11 @@ def process_video_endpoint(video_path):
     Runs VIBE on a video and returns the path to the output .pkl file.
     """
     print(f"\n--- 1. STARTING VIBE PROCESSING for {video_path} ---")
-    video_name = os.path.basename(video_path).split('.')[0]
+    # video_name = os.path.basename(video_path).split('.')[0] # No longer needed for path
     output_folder = 'output' 
     
-    # This is the *actual* path VIBE will create
-    result_dir = os.path.join(output_folder, video_name)
-    result_path = os.path.join(result_dir, "vibe_output.pkl")
+    # This is the new, simplified path you requested
+    result_path = os.path.join(output_folder, "vibe_output.pkl")
 
     run_vibe(
         vid_file=video_path,
@@ -155,6 +154,7 @@ def run_full_pipeline(input_video_path):
     if vibe_results['status'] == 'error':
         return vibe_results # Pass the error dictionary up
     
+    # Use the path returned from the previous step
     pkl_file = vibe_results['result_file']
     
     # --- STAGE 2: Convert PKL to PLY (PKL -> PLY) ---
