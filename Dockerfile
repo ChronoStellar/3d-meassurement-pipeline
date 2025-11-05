@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     python3.10 \
     python3-pip \
     git \
+    wget \
     libegl1 \
     libopengl0 \
     libglx-mesa0 \
@@ -31,8 +32,8 @@ COPY . .
 
 # 6. Make your data script executable and RUN it
 # This will download the SMPL/VIBE models into the container
-RUN chmod +x scripts/prepare_data.sh \
- && ./scripts/prepare_data.sh
+RUN chmod +x scripts/move_yolo.sh \
+ && ./scripts/move_yolo.sh
 
 # 7. Expose the port Hugging Face expects
 EXPOSE 8080
