@@ -23,8 +23,8 @@ output/
 vibe_results/
 
 # Test data (don't copy sample videos into the image)
-*.mp4
-*.mov
+# *.mp4
+# *.mov
 # *.MOV
 
 # Any other result files

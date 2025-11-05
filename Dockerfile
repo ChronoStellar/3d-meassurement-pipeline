@@ -32,8 +32,10 @@ COPY . .
 
 # 6. Make your data script executable and RUN it
 # This will download the SMPL/VIBE models into the container
-RUN chmod +x scripts/move_yolo.sh \
- && ./scripts/move_yolo.sh
+RUN mkdir -p /root/.torch/models/ \
+ && mkdir -p /root/.torch/config/ \
+ && cp data/vibe_data/yolov3.weights /root/.torch/models/yolov3.weights \
+ && cp data/yolov3.cfg /root/.torch/config/yolov3.cfg
 
 # 7. Expose the port Hugging Face expects
 EXPOSE 8080

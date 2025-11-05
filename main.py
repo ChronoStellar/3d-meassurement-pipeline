@@ -188,7 +188,7 @@ def run_full_pipeline(input_video_path):
 if __name__ == '__main__':
     
     # You can change this path to test different videos
-    video_to_process = "IMG_0802.MOV" 
+    video_to_process = "sample_video.mp4" 
     
     if os.path.exists(video_to_process):
         
