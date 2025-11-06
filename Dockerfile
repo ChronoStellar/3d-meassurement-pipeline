@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     python3.10 \
     python3-pip \
     git \
-    wget \
+    # wget \
     libegl1 \
     libopengl0 \
     libglx-mesa0 \
@@ -43,4 +43,4 @@ EXPOSE 8080
 # 8. Set the command to run Gunicorn when the container starts
 #    --bind 0.0.0.0:8080: Binds to port 8080 (REQUIRED by Hugging Face)
 #
-CMD ["gunicorn", "--workers", "1", "--timeout", "120", "--bind", "0.0.0.0:8080", "api:app"]
+CMD ["python", "handler.py"]

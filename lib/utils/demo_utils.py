@@ -22,7 +22,6 @@ import torch
 import subprocess
 import numpy as np
 import os.path as osp
-from pytube import YouTube
 from collections import OrderedDict
 
 from lib.utils.smooth_bbox import get_smooth_bbox_params, get_all_bbox_params
