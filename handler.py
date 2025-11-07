@@ -11,6 +11,7 @@ import os
 import json
 import base64
 import tempfile
+import runpod
 from pathlib import Path
 
 # ---- Your pipeline ------------------------------------------------
@@ -100,7 +101,7 @@ def handler(job: dict) -> dict:
             "message": str(exc)
         }
 
-runpod.Serverless.start({'handler': handler})
+runpod.serverless.start({'handler': handler})
 
 # ------------------------------------------------------------------
 # For local testing (optional)
@@ -111,9 +112,15 @@ runpod.Serverless.start({'handler': handler})
 #         print("Usage: python handler.py <path-to-video.mp4>")
 #         sys.exit(1)
 
-#     fake_job = {
+#     result = handler({
 #         "input": {
 #             "video": base64.b64encode(Path(sys.argv[1]).read_bytes()).decode()
 #         }
-#     }
-#     print(json.dumps(handler(fake_job), indent=2))
+#     })
+
+#     if result["status"] == "success":
+#         print("SUCCESS! Measurements:")
+#         for k, v in result["measurements"].items():
+#             print(f"  {k}: {v} cm")
+#     else:
+#         print(f"ERROR: {result['message']}")

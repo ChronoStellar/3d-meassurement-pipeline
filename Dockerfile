@@ -2,7 +2,7 @@
 
 # 1. Start from an NVIDIA CUDA 12.1.0 image (to match your torch requirement)
 # This image is based on Ubuntu 22.04, which uses Python 3.10
-FROM nvidia/cuda:12.5.0-runtime-ubuntu22.04
+FROM nvidia/cuda:12.1.1-runtime-ubuntu22.04
 
 
 # 2. Set the working directory
