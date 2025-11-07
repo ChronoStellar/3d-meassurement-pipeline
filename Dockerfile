@@ -13,7 +13,6 @@ RUN apt-get update && apt-get install -y \
     python3.10 \
     python3-pip \
     git \
-    wget \
     libegl1 \
     libopengl0 \
     libglx-mesa0 \
@@ -34,13 +33,8 @@ COPY . .
 # This will download the SMPL/VIBE models into the container
 RUN mkdir -p /root/.torch/models/ \
  && mkdir -p /root/.torch/config/ \
- && cp data/vibe_data/yolov3.weights /root/.torch/models/yolov3.weights \
- && cp data/yolov3.cfg /root/.torch/config/yolov3.cfg
+ && mv data/vibe_data/yolov3.weights /root/.torch/models/yolov3.weights \
+ && mv data/yolov3.cfg /root/.torch/config/yolov3.cfg
 
-# 7. Expose the port Hugging Face expects
-EXPOSE 8080
-
-# 8. Set the command to run Gunicorn when the container starts
-#    --bind 0.0.0.0:8080: Binds to port 8080 (REQUIRED by Hugging Face)
-#
-CMD ["gunicorn", "--workers", "1", "--timeout", "120", "--bind", "0.0.0.0:8080", "api:app"]
+# 7. Set the command
+CMD ["python", 'handler.py']
